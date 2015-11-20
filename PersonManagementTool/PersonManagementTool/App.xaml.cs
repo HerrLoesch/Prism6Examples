@@ -8,10 +8,16 @@ using System.Windows;
 
 namespace PersonManagementTool
 {
+    using System.Windows.Navigation;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            new Bootstrapper().Run();
+        }
     }
 }

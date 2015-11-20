@@ -1,8 +1,8 @@
 ﻿<Application x:Class="PersonManagementTool.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PersonManagementTool"
-             StartupUri="MainWindow.xaml">
+             Startup="OnStartup"
+             xmlns:local="clr-namespace:PersonManagementTool">
     <Application.Resources>
          
     </Application.Resources>
