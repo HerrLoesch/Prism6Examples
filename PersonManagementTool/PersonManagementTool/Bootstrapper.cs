@@ -8,7 +8,18 @@ namespace PersonManagementTool
 {
     using System.Windows;
 
+    using Microsoft.Practices.Unity;
+
     using Prism.Unity;
+
+    using Microsoft.Practices.Unity.Configuration;
+
+    using PersonManagementTool.Contracts;
+    using PersonManagementTool.Data;
+    using PersonManagementTool.Views;
+
+    using Prism.Regions;
+
     public class Bootstrapper : UnityBootstrapper
     {
         /// <summary>
@@ -26,7 +37,18 @@ namespace PersonManagementTool
         /// </remarks>
         protected override DependencyObject CreateShell()
         {
-            return new MainWindow();
+            return this.Container.Resolve<MainWindow>();
+        }
+
+        /// <summary>
+        /// Configures the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>. May be overwritten in a derived class to add specific
+        ///             type mappings required by the application.
+        /// </summary>
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            this.Container.RegisterType<IPersonRepository, Repository>();
         }
 
         /// <summary>
@@ -38,6 +60,9 @@ namespace PersonManagementTool
 
             var window = (MainWindow)this.Shell;
             Application.Current.MainWindow = window;
+
+            var regionManager = this.Container.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion(RegionNames.SelectionRegionName, typeof(PersonSelectionView));
 
             window.Show();
         }
