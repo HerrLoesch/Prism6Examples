@@ -1,7 +1,13 @@
 ﻿namespace PersonManagementTool.Contracts
 {
+    using System;
+
     public class Person
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }

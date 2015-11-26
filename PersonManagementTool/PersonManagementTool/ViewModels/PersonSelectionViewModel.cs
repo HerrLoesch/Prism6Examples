@@ -4,7 +4,7 @@ namespace PersonManagementTool.ViewModels
 
     using PersonManagementTool.Contracts;
 
-    public class PersonSelectionViewModel
+    public class PersonSelectionViewModel : IPersonSelectionViewModel
     {
         private IPersonRepository personRepository;
 

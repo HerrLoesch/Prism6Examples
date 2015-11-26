@@ -9,8 +9,8 @@ namespace PersonManagementTool.Specs
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using PersonManagementTool.Contracts;
-    using PersonManagementTool.ViewModels;
+    using Contracts;
+    using ViewModels;
 
     using Tynamix.ObjectFiller;
 
@@ -35,8 +35,8 @@ namespace PersonManagementTool.Specs
         [TestMethod]
         public void ThenAllAvailablePersonsShallBeShown()
         {
-            Assert.AreEqual(this.persons.First().Name, this.SUT.AvailablePersons.First().Name);
-            Assert.AreEqual(this.persons.Last().Name, this.SUT.AvailablePersons.Last().Name);
+            Assert.AreEqual(this.persons.First().FirstName, this.SUT.AvailablePersons.First().FirstName);
+            Assert.AreEqual(this.persons.Last().FirstName, this.SUT.AvailablePersons.Last().FirstName);
         }
     }
 }

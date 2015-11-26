@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="PersonManagementTool.Views.PersonSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonManagementTool.Views"
+             xmlns:viewModels="clr-namespace:PersonManagementTool.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:PersonSelectionDesignViewModel, IsDesignTimeCreatable=True}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ListBox ItemsSource="{Binding AvailablePersons}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" {0} {1}">
+                            <Binding Path="FirstName" />
+                            <Binding Path="LastName" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>
