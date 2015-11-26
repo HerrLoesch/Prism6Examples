@@ -1,25 +1,33 @@
 ﻿
 namespace PersonManagementTool.Data
 {
+    using System;
+
     using PersonManagementTool.Contracts;
 
     using System.Collections.Generic;
-    
-    using Tynamix.ObjectFiller;
+    using System.Linq;
 
-    public class Repository : IPersonRepository
+    public class Repository : IPersonRepository, IDisposable
     {
+        private readonly PersonContext context;
+
+        public Repository()
+        {
+            this.context = new PersonContext();
+        }
+
         public IEnumerable<Person> GetAllPersons()
         {
-            var filler = new Filler<Person>();
+            return this.context.Persons.ToList();
+        }
 
-            filler.Setup()
-                    .OnProperty(x => x.FirstName)
-                    .Use(new RealNames(NameStyle.FirstName))
-                    .OnProperty(x => x.LastName)
-                    .Use(new RealNames(NameStyle.LastName));
-
-            return filler.Create(5);
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.context.Dispose();
         }
     }
 }

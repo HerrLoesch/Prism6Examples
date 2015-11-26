@@ -64,6 +64,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Transactions" />
     <Reference Include="Tynamix.ObjectFiller, Version=1.3.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Tynamix.ObjectFiller.1.3.9\lib\Tynamix.ObjectFiller.dll</HintPath>
       <Private>True</Private>
@@ -83,9 +85,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WhenApplicationIsInitialized.cs" />
+    <Compile Include="Specs\WhenApplicationIsInitialized.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

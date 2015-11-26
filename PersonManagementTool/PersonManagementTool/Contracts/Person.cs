@@ -9,5 +9,8 @@
         public string LastName { get; set; }
 
         public DateTime BirthDate { get; set; }
+
+        
+        public int ID { get; set; }
     }
 }
