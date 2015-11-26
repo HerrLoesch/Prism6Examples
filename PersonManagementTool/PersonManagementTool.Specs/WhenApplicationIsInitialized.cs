@@ -29,7 +29,7 @@ namespace PersonManagementTool.Specs
 
         public override void When()
         {
-            this.SUT.Initialize();
+            this.SUT.InitializationCommand.Execute().Wait();
         }
 
         [TestMethod]

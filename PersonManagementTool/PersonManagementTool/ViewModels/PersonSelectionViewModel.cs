@@ -4,11 +4,14 @@ namespace PersonManagementTool.ViewModels
 
     using PersonManagementTool.Contracts;
 
-    public class PersonSelectionViewModel : IPersonSelectionViewModel
+    using Prism.Commands;
+    using Prism.Mvvm;
+
+    public class PersonSelectionViewModel : BindableBase, IPersonSelectionViewModel
     {
         private IPersonRepository personRepository;
 
-        public void Initialize()
+        private void Initialize()
         {
             this.AvailablePersons = this.personRepository.GetAllPersons();
         }
@@ -16,8 +19,24 @@ namespace PersonManagementTool.ViewModels
         public PersonSelectionViewModel(IPersonRepository repository)
         {
             this.personRepository = repository;
+
+            this.InitializationCommand = new DelegateCommand(this.Initialize);
         }
 
-        public IEnumerable<Person> AvailablePersons { get; set; }
+        private IEnumerable<Person> availablePersons;
+
+        public IEnumerable<Person> AvailablePersons
+        {
+            get
+            {
+                return this.availablePersons;
+            }
+            set
+            {
+                this.SetProperty(ref this.availablePersons, value);
+            }
+        }
+
+        public DelegateCommand InitializationCommand { get; set; }
     }
 }

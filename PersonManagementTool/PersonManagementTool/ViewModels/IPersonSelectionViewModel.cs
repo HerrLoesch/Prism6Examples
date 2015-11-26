@@ -3,18 +3,22 @@ using PersonManagementTool.Contracts;
 
 namespace PersonManagementTool.ViewModels
 {
+    using Prism.Commands;
+
     using Tynamix.ObjectFiller;
 
     public interface IPersonSelectionViewModel
     {
         IEnumerable<Person> AvailablePersons { get; set; }
 
-        void Initialize();
+        DelegateCommand InitializationCommand { get; set; }
     }
 
     public class PersonSelectionDesignViewModel : IPersonSelectionViewModel
     {
         public IEnumerable<Person> AvailablePersons { get; set; }
+
+        public DelegateCommand InitializationCommand { get; set; }
 
         public PersonSelectionDesignViewModel()
         {
@@ -26,13 +30,7 @@ namespace PersonManagementTool.ViewModels
                     .OnProperty(x => x.LastName)
                     .Use(new RealNames(NameStyle.LastName));
 
-
-
             this.AvailablePersons = filler.Create(5);
-        }
-
-        public void Initialize()
-        {
         }
     }
 }
