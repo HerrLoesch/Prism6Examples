@@ -5,14 +5,13 @@ namespace PersonManagementTool.Specs
 
     using DynamicSpecs.MSTest;
 
-    using FakeItEasy;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Contracts;
-    using ViewModels;
 
-    using Tynamix.ObjectFiller;
+    using PersonManagementTool.Specs.Preconditions;
+
+    using ViewModels;
 
     [TestClass]
     public class WhenApplicationIsInitialized : Specifies<PersonSelectionViewModel>
@@ -21,10 +20,7 @@ namespace PersonManagementTool.Specs
 
         public override void Given()
         {
-            this.persons = Randomizer<Person>.Create(2);
-            var personRepository = this.GetInstance<IPersonRepository>();
-
-            A.CallTo(() => personRepository.GetAllPersons()).Returns(this.persons);
+            this.persons = this.Given<PersonsAreAvailable>().AvailablePersons;
         }
 
         public override void When()
