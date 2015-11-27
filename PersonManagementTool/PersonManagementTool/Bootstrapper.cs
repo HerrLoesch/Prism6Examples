@@ -63,6 +63,7 @@ namespace PersonManagementTool
 
             var regionManager = this.Container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion(RegionNames.SelectionRegionName, typeof(PersonSelectionView));
+            regionManager.RegisterViewWithRegion(RegionNames.ContentRegionName, typeof(PersonDetailsView));
 
             window.Show();
         }

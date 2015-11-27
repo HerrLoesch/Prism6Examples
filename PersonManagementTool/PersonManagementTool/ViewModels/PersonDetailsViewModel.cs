@@ -5,7 +5,7 @@
     using Prism.Events;
     using Prism.Mvvm;
 
-    public class PersonDetailsViewModel : BindableBase
+    public class PersonDetailsViewModel : BindableBase, IPersonDetailsViewModel
     {
         private readonly IPersonRepository repository;
 

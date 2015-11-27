@@ -18,7 +18,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <ListBox ItemsSource="{Binding AvailablePersons}">
+    <ListBox ItemsSource="{Binding AvailablePersons}" SelectedValue="{Binding SelectedPerson}">
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <TextBlock>

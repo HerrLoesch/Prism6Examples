@@ -24,7 +24,7 @@ namespace PersonManagementTool.Data
 
         public Person GetPerson(int id)
         {
-            throw new NotImplementedException();
+            return this.context.Persons.First(x => x.ID == id);
         }
 
         /// <summary>

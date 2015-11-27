@@ -12,6 +12,8 @@ namespace PersonManagementTool.ViewModels
         IEnumerable<Person> AvailablePersons { get; set; }
 
         DelegateCommand InitializationCommand { get; set; }
+
+        Person SelectedPerson { get; set; }
     }
 
     public class PersonSelectionDesignViewModel : IPersonSelectionViewModel
@@ -19,6 +21,8 @@ namespace PersonManagementTool.ViewModels
         public IEnumerable<Person> AvailablePersons { get; set; }
 
         public DelegateCommand InitializationCommand { get; set; }
+
+        public Person SelectedPerson { get; set; }
 
         public PersonSelectionDesignViewModel()
         {
