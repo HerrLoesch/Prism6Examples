@@ -5,5 +5,7 @@ namespace PersonManagementTool.Contracts
     public interface IPersonRepository
     {
         IEnumerable<Person> GetAllPersons();
+
+        Person GetPerson(int id);
     }
 }

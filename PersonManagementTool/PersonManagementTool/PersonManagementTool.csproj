@@ -60,6 +60,9 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
       <Private>True</Private>
@@ -98,10 +101,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Contracts\PersonSelectionEvent.cs" />
     <Compile Include="Data\PersonContext.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ViewModels\IPersonSelectionViewModel.cs" />
+    <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonSelectionViewModel.cs" />
     <Compile Include="Views\PersonSelectionView.xaml.cs">
       <DependentUpon>PersonSelectionView.xaml</DependentUpon>
@@ -144,6 +149,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Fakes Include="Fakes\Prism.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

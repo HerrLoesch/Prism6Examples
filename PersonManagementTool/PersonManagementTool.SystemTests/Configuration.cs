@@ -30,6 +30,7 @@
         {
             using (var context = new PersonContext())
             {
+                
                 context.Database.CreateIfNotExists();
             }
         }

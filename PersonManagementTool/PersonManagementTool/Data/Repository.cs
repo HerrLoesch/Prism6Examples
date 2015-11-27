@@ -22,6 +22,11 @@ namespace PersonManagementTool.Data
             return this.context.Persons.ToList();
         }
 
+        public Person GetPerson(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>

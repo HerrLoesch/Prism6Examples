@@ -1,6 +1,7 @@
 namespace PersonManagementTool.Specs.Preconditions
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using DynamicSpecs.Core;
 
@@ -20,6 +21,9 @@ namespace PersonManagementTool.Specs.Preconditions
             var personRepository = specification.GetInstance<IPersonRepository>();
 
             A.CallTo(() => personRepository.GetAllPersons()).Returns(this.AvailablePersons);
+
+            A.CallTo(() => personRepository.GetPerson(A<int>.Ignored))
+                .ReturnsLazily((int id) => this.AvailablePersons.First(p => p.ID == id));
         }
     }
 }

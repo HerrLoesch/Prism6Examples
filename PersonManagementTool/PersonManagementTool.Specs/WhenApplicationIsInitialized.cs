@@ -9,7 +9,11 @@ namespace PersonManagementTool.Specs
 
     using Contracts;
 
+    using DynamicSpecs.Core;
+
     using PersonManagementTool.Specs.Preconditions;
+
+    using Prism.Events;
 
     using ViewModels;
 

@@ -9,8 +9,8 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using PersonManagementTool.Contracts;
-    using PersonManagementTool.Specs.Preconditions;
+    using Contracts;
+    using Preconditions;
 
     using Prism.Events;
 
@@ -37,9 +37,5 @@
             var eventAggregator = this.GetInstance<IEventAggregator>();
             A.CallTo(() => eventAggregator.GetEvent<PersonSelectionEvent>()).MustHaveHappened();
         }
-    }
-
-    public class PersonSelectionEvent : PubSubEvent<Person>
-    {
     }
 }

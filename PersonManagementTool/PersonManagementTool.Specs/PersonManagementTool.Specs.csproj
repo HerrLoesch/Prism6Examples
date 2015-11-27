@@ -84,8 +84,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Preconditions\PersonsAreAvailable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specs\WhenApplicationIsInitialized.cs" />
+    <Compile Include="WhenApplicationIsInitialized.cs" />
+    <Compile Include="WhenPersonIsSelected.cs" />
+    <Compile Include="WhenSelectedPersonChanges.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
