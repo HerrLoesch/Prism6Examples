@@ -87,6 +87,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Converter\NullToVisibilityConverterTests.cs" />
+    <Compile Include="PersonDetails\WhenPersonWithoutAnyDataIsShown.cs" />
     <Compile Include="PersonDetails\WhenUserWantsToAddANewPerson.cs" />
     <Compile Include="Preconditions\PersonsAreAvailable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

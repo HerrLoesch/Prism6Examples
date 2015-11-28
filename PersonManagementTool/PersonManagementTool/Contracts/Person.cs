@@ -1,16 +1,153 @@
 ﻿namespace PersonManagementTool.Contracts
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
 
-    public class Person
+    using PersonManagementTool.Annotations;
+
+    public class Person : INotifyPropertyChanged, IDataErrorInfo
     {
-        public string FirstName { get; set; }
+        private DateTime birthDate;
 
-        public string LastName { get; set; }
+        private readonly Dictionary<string, string> errors = new Dictionary<string, string>();
 
-        public DateTime BirthDate { get; set; }
+        private string firstName;
 
-        
+        private string lastName;
+
+        public string FirstName
+        {
+            get
+            {
+                return this.firstName;
+            }
+            set
+            {
+                if (value == this.firstName)
+                {
+                    return;
+                }
+                this.firstName = value;
+                this.CheckForErrors();
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return this.lastName;
+            }
+            set
+            {
+                if (value == this.lastName)
+                {
+                    return;
+                }
+                this.lastName = value;
+                this.CheckForErrors();
+                this.OnPropertyChanged();
+            }
+        }
+
+        public DateTime BirthDate
+        {
+            get
+            {
+                return this.birthDate;
+            }
+            set
+            {
+                if (value.Equals(this.birthDate))
+                {
+                    return;
+                }
+                this.birthDate = value;
+                this.CheckForErrors();
+                this.OnPropertyChanged();
+            }
+        }
+
         public int? ID { get; set; }
+
+        /// <summary>
+        /// Gets the error message for the property with the given name.
+        /// </summary>
+        /// <returns>
+        /// The error message for the property. The default is an empty string ("").
+        /// </returns>
+        /// <param name="columnName">The name of the property whose error message to get. </param>
+        public string this[string columnName]
+        {
+            get
+            {
+                string resultText = null;
+                this.errors.TryGetValue(columnName, out resultText);
+
+                return resultText;
+            }
+        }
+
+        private void CheckForErrors()
+        {
+            // Kids, don't try this at home. It's just for presentation purpose and I know it's ugly as hell...
+            var keys = this.errors.Keys.ToList();
+            foreach (var key in keys)
+            {
+                this.errors[key] = null;
+            }
+
+            if (string.IsNullOrEmpty(this.FirstName) || string.IsNullOrWhiteSpace(this.FirstName))
+            {
+                this.Error = this.errors["FirstName"] = "Bitte geben Sie einen Vornamen ein.";
+            }
+
+            if (string.IsNullOrEmpty(this.LastName) || string.IsNullOrWhiteSpace(this.LastName))
+            {
+                this.Error = this.errors["LastName"] = "Bitte geben Sie einen Nachnamen ein.";
+            }
+
+            if (this.BirthDate.Year <= 1850)
+            {
+                this.Error = this.errors["BirthDate"] = "Bitte geben Sie ein Gebursdatum ein.";
+            }
+        }
+
+        private string error;
+
+        /// <summary>
+        /// Gets an error message indicating what is wrong with this object.
+        /// </summary>
+        /// <returns>
+        /// An error message indicating what is wrong with this object. The default is an empty string ("").
+        /// </returns>
+        public string Error
+        {
+            get
+            {
+                return this.error;
+            }
+            private set
+            {
+                if (value == this.error)
+                {
+                    return;
+                }
+                this.error = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

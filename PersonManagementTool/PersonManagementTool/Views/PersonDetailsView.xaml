@@ -30,13 +30,13 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="Vorname"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedPerson.FirstName}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="4" Text="{Binding SelectedPerson.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Column="0" Grid.Row="1" Content="Nachname"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedPerson.LastName}" />
+            <TextBox Grid.Column="1" Grid.Row="1" Margin="4" Text="{Binding SelectedPerson.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Column="0" Grid.Row="2" Content="Geburtstag"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedPerson.BirthDate, StringFormat=d}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="4" Text="{Binding SelectedPerson.BirthDate, StringFormat=d, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </Grid>
 </UserControl>
