@@ -14,7 +14,7 @@ namespace PersonManagementTool.ViewModels
 
         private readonly IEventAggregator eventAggregator;
 
-        private void Initialize()
+        private void LoadAllPersons()
         {
             this.AvailablePersons = this.personRepository.GetAllPersons();
         }
@@ -24,7 +24,15 @@ namespace PersonManagementTool.ViewModels
             this.personRepository = repository;
             this.eventAggregator = eventAggregator;
 
-            this.InitializationCommand = new DelegateCommand(this.Initialize);
+            this.eventAggregator.GetEvent<PersonDataChangedEvent>().Subscribe(this.Update);
+
+            this.InitializationCommand = new DelegateCommand(this.LoadAllPersons);
+        }
+
+        private void Update(Person person)
+        {
+            // I know it's dirty but I just want to show prism... 
+            this.LoadAllPersons();
         }
 
         private IEnumerable<Person> availablePersons;

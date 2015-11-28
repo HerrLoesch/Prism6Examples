@@ -27,6 +27,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="Vorname"/>
@@ -37,6 +38,8 @@
 
             <Label Grid.Column="0" Grid.Row="2" Content="Geburtstag"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="4" Text="{Binding SelectedPerson.BirthDate, StringFormat=d, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+        
+            <Button Grid.Column="1" Grid.Row="3" Content="Speichern" Margin="4" Command="{Binding SaveCommand}" />
         </Grid>
     </Grid>
 </UserControl>

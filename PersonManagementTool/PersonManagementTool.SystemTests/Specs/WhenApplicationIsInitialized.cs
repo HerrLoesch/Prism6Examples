@@ -15,6 +15,7 @@ namespace PersonManagementTool.SystemTests.Specs
     using Tynamix.ObjectFiller;
 
     [TestClass]
+    [Ignore]
     public class WhenApplicationIsInitialized : Specifies<PersonSelectionViewModel>, INeedDataBaseContext
     {
         private IEnumerable<Person> persons;
@@ -29,7 +30,7 @@ namespace PersonManagementTool.SystemTests.Specs
         {
             var personFiller = new Filler<Person>();
 
-            personFiller.Setup().OnProperty(x => x.ID).IgnoreIt();
+            personFiller.Setup().OnProperty(x => x.Id).IgnoreIt();
 
             this.persons = personFiller.Create(2);
 

@@ -30,7 +30,7 @@
         [TestMethod]
         public void ThenAPersonObjectWithoutAnIdIsSelected()
         {
-            Assert.IsNull(this.SUT.SelectedPerson.ID);
+            Assert.IsNull(this.SUT.SelectedPerson.Id);
         }
     }
 }

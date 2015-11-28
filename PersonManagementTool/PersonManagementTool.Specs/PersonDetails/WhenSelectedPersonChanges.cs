@@ -41,8 +41,8 @@
         [TestMethod]
         public void ThenItShallBeShownInTheDetailsView()
         {
-            var id = this.SUT.SelectedPerson.ID;
-            Assert.AreEqual(this.selectedPerson.ID, id);
+            var id = this.SUT.SelectedPerson.Id;
+            Assert.AreEqual(this.selectedPerson.Id, id);
         }
     }
 }

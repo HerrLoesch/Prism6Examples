@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -72,7 +73,8 @@
             }
         }
 
-        public int? ID { get; set; }
+        [Key]
+        public int? Id { get; set; }
 
         /// <summary>
         /// Gets the error message for the property with the given name.
@@ -95,11 +97,7 @@
         private void CheckForErrors()
         {
             // Kids, don't try this at home. It's just for presentation purpose and I know it's ugly as hell...
-            var keys = this.errors.Keys.ToList();
-            foreach (var key in keys)
-            {
-                this.errors[key] = null;
-            }
+            this.ResetErrors();
 
             if (string.IsNullOrEmpty(this.FirstName) || string.IsNullOrWhiteSpace(this.FirstName))
             {
@@ -115,6 +113,17 @@
             {
                 this.Error = this.errors["BirthDate"] = "Bitte geben Sie ein Gebursdatum ein.";
             }
+        }
+
+        private void ResetErrors()
+        {
+            var keys = this.errors.Keys.ToList();
+            foreach (var key in keys)
+            {
+                this.errors[key] = null;
+            }
+
+            this.Error = null;
         }
 
         private string error;
@@ -133,10 +142,6 @@
             }
             private set
             {
-                if (value == this.error)
-                {
-                    return;
-                }
                 this.error = value;
                 this.OnPropertyChanged();
             }
@@ -148,6 +153,11 @@
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void ValidateInput()
+        {
+            this.CheckForErrors();
         }
     }
 }

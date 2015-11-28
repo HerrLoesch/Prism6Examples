@@ -23,7 +23,7 @@ namespace PersonManagementTool.Specs.Preconditions
             A.CallTo(() => personRepository.GetAllPersons()).Returns(this.AvailablePersons);
 
             A.CallTo(() => personRepository.GetPerson(A<int>.Ignored))
-                .ReturnsLazily((int id) => this.AvailablePersons.First(p => p.ID == id));
+                .ReturnsLazily((int id) => this.AvailablePersons.First(p => p.Id == id));
         }
     }
 }

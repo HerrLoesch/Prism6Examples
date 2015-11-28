@@ -7,5 +7,7 @@ namespace PersonManagementTool.Contracts
         IEnumerable<Person> GetAllPersons();
 
         Person GetPerson(int id);
+
+        void Update(Person person);
     }
 }

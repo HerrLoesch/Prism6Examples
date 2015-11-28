@@ -6,6 +6,7 @@ namespace PersonManagementTool.Data
     using PersonManagementTool.Contracts;
 
     using System.Collections.Generic;
+    using System.Data.Entity.Migrations;
     using System.Linq;
 
     public class Repository : IPersonRepository, IDisposable
@@ -25,7 +26,13 @@ namespace PersonManagementTool.Data
 
         public Person GetPerson(int id)
         {
-            return this.context.Persons.First(x => x.ID == id);
+            return this.context.Persons.First(x => x.Id == id);
+        }
+
+        public void Update(Person person)
+        {
+            this.context.Persons.AddOrUpdate(person);
+            this.context.SaveChanges();
         }
 
         /// <summary>
