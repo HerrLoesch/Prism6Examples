@@ -20,7 +20,7 @@
 
     <i:Interaction.Triggers>
         <mvvm:InteractionRequestTrigger SourceObject="{Binding SaveConfirmation}">
-            <mvvm:PopupWindowAction />
+            <mvvm:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
         </mvvm:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     <Grid>
