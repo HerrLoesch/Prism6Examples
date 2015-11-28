@@ -6,6 +6,7 @@
 
     using Prism.Commands;
     using Prism.Events;
+    using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
 
     public class PersonDetailsViewModel : BindableBase, IPersonDetailsViewModel
@@ -23,6 +24,8 @@
         {
             this.eventAggregator = eventAggregator;
             this.repository = repository;
+            this.SaveConfirmation = new InteractionRequest<IConfirmation>(); ;
+
             eventAggregator.GetEvent<PersonSelectionEvent>()
                 .Subscribe(this.OnPersonSelected, ThreadOption.PublisherThread);
 
@@ -76,17 +79,27 @@
             return false;
         }
 
+        public InteractionRequest<IConfirmation> SaveConfirmation { get; private set; }
+
         private void Save()
         {
-            this.repository.Update(this.SelectedPerson);
-            this.eventAggregator.GetEvent<PersonDataChangedEvent>().Publish(this.SelectedPerson);
+            this.SaveConfirmation.Raise(new Confirmation() {Content = "Wollen Sie wirklich speichen?", Title = "Speichern?"}, this.OnSaveConfirmed);
+        }
+
+        public void OnSaveConfirmed(IConfirmation confirmation)
+        {
+            if (confirmation.Confirmed)
+            {
+                this.repository.Update(this.SelectedPerson);
+                this.eventAggregator.GetEvent<PersonDataChangedEvent>().Publish(this.SelectedPerson);
+            }
         }
 
         private void OnPersonSelected(Person person)
         {
-            if (person.Id.HasValue)
+            if (person.Id != 0)
             {
-                this.SelectedPerson = this.repository.GetPerson(person.Id.Value);
+                this.SelectedPerson = this.repository.GetPerson(person.Id);
             }
         }
     }

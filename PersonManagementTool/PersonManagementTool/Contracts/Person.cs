@@ -74,7 +74,7 @@
         }
 
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets the error message for the property with the given name.

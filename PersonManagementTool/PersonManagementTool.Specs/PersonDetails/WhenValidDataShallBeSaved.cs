@@ -13,6 +13,7 @@
     using FakeItEasy;
 
     using Prism.Events;
+    using Prism.Interactivity.InteractionRequest;
 
     [TestClass]
     public class WhenValidDataShallBeSaved : Specifies<PersonDetailsViewModel>
@@ -37,7 +38,10 @@
 
         public override void When()
         {
-            this.SUT.SaveCommand.Execute();
+            var confirmation = A.Fake<IConfirmation>();
+            A.CallTo(() => confirmation.Confirmed).Returns(true);
+
+            this.SUT.OnSaveConfirmed(confirmation);
         }
 
         [TestMethod]

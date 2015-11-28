@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:PersonManagementTool.Views"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:PersonManagementTool.ViewModels"
-             xmlns:converter="clr-namespace:PersonManagementTool.Converter" x:Class="PersonManagementTool.Views.PersonDetailsView"
+             xmlns:converter="clr-namespace:PersonManagementTool.Converter"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             x:Class="PersonManagementTool.Views.PersonDetailsView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance {x:Type viewModels:PersonDetailsDesignViewModel}, IsDesignTimeCreatable=True}"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -15,6 +17,12 @@
         <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         <converter:NullToVisibilityConverter x:Key="InvertedNullToVisibilityConverter" IsInverted="True"/>
     </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <mvvm:InteractionRequestTrigger SourceObject="{Binding SaveConfirmation}">
+            <mvvm:PopupWindowAction />
+        </mvvm:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding SelectedPerson, Converter={StaticResource InvertedNullToVisibilityConverter}}" ><Run Text="Bitte wählen Sie eine Person auf der linken Seite."/></TextBlock>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding SelectedPerson, Converter={StaticResource NullToVisibilityConverter}}" >
