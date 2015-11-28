@@ -15,6 +15,7 @@ namespace PersonManagementTool.Data
         public Repository()
         {
             this.context = new PersonContext();
+            this.context.Database.CreateIfNotExists();
         }
 
         public IEnumerable<Person> GetAllPersons()
