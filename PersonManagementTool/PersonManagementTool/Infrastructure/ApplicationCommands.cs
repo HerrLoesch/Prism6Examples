@@ -14,7 +14,7 @@
         {
             this.NewCommand = new CompositeCommand();
 
-            this.SaveCommand = new CompositeCommand(true);
+            this.SaveCommand = new CompositeCommand();
         }
     }
 }
