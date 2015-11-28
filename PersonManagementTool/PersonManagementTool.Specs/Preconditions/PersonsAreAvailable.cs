@@ -17,7 +17,10 @@ namespace PersonManagementTool.Specs.Preconditions
 
         public void Support(ISpecify specification)
         {
-            this.AvailablePersons = Randomizer<Person>.Create(2);
+            var filler = new Filler<Person>();
+            filler.Setup().OnProperty(x => x.Numbers).IgnoreIt();
+
+            this.AvailablePersons = filler.Create(2);
             var personRepository = specification.GetInstance<IPersonRepository>();
 
             A.CallTo(() => personRepository.GetAllPersons()).Returns(this.AvailablePersons);

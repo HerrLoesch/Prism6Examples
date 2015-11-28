@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -11,9 +12,11 @@
 
     public class Person : INotifyPropertyChanged, IDataErrorInfo
     {
+        private readonly Dictionary<string, string> errors = new Dictionary<string, string>();
+
         private DateTime birthDate;
 
-        private readonly Dictionary<string, string> errors = new Dictionary<string, string>();
+        private string error;
 
         private string firstName;
 
@@ -76,6 +79,20 @@
         [Key]
         public int Id { get; set; }
 
+        private ObservableCollection<KeyValuePair<int, int>> numbers = new ObservableCollection<KeyValuePair<int, int>>();
+
+        public ObservableCollection<KeyValuePair<int, int>> Numbers
+        {
+            get
+            {
+                return this.numbers;
+            }
+            set
+            {
+                this.numbers = value;
+            }
+        }
+
         /// <summary>
         /// Gets the error message for the property with the given name.
         /// </summary>
@@ -93,6 +110,27 @@
                 return resultText;
             }
         }
+
+        /// <summary>
+        /// Gets an error message indicating what is wrong with this object.
+        /// </summary>
+        /// <returns>
+        /// An error message indicating what is wrong with this object. The default is an empty string ("").
+        /// </returns>
+        public string Error
+        {
+            get
+            {
+                return this.error;
+            }
+            private set
+            {
+                this.error = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void CheckForErrors()
         {
@@ -125,29 +163,6 @@
 
             this.Error = null;
         }
-
-        private string error;
-
-        /// <summary>
-        /// Gets an error message indicating what is wrong with this object.
-        /// </summary>
-        /// <returns>
-        /// An error message indicating what is wrong with this object. The default is an empty string ("").
-        /// </returns>
-        public string Error
-        {
-            get
-            {
-                return this.error;
-            }
-            private set
-            {
-                this.error = value;
-                this.OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

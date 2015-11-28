@@ -1,6 +1,7 @@
 ﻿namespace PersonManagementTool.ViewModels
 {
     using System;
+    using System.Collections.Generic;
 
     using PersonManagementTool.Contracts;
 
@@ -16,6 +17,8 @@
         Person SelectedPerson { get; set; }
 
         InteractionRequest<IConfirmation> SaveConfirmation { get; }
+
+        DelegateCommand GenerateNumbersCommand { get; set; }
     }
 
     public class PersonDetailsDesignViewModel : IPersonDetailsViewModel
@@ -26,6 +29,8 @@
 
         public InteractionRequest<IConfirmation> SaveConfirmation { get; private set; }
 
+        public DelegateCommand GenerateNumbersCommand { get; set; }
+
         public Person SelectedPerson { get; set; }
 
         public PersonDetailsDesignViewModel()
@@ -34,6 +39,11 @@
             person.FirstName = "Hendrik";
             person.LastName = "Lösch";
             person.BirthDate = DateTime.Now;
+
+            for (int i = 0; i < 20; i++)
+            {
+                person.Numbers.Add(new KeyValuePair<int,int>(i,i));
+            }
 
             this.SelectedPerson = person;
         }

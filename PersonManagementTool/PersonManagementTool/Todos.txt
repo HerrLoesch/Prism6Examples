@@ -1,8 +1,3 @@
-﻿- Save
-	o Can Execute for Composite Commands -> Validation
-	o Confirmation
-	o Alert
-
-- Analyzation
+﻿- Analyzation
 	o Navigation
 	o Modules

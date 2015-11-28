@@ -1,5 +1,6 @@
 ﻿namespace PersonManagementTool.ViewModels
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     using PersonManagementTool.Contracts;
@@ -9,11 +10,13 @@
     using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
 
+    using Tynamix.ObjectFiller;
+
     public class PersonDetailsViewModel : BindableBase, IPersonDetailsViewModel
     {
-        private readonly IPersonRepository repository;
-
         private readonly IEventAggregator eventAggregator;
+
+        private readonly IPersonRepository repository;
 
         private Person selectedPerson;
 
@@ -24,7 +27,8 @@
         {
             this.eventAggregator = eventAggregator;
             this.repository = repository;
-            this.SaveConfirmation = new InteractionRequest<IConfirmation>(); ;
+            this.SaveConfirmation = new InteractionRequest<IConfirmation>();
+            ;
 
             eventAggregator.GetEvent<PersonSelectionEvent>()
                 .Subscribe(this.OnPersonSelected, ThreadOption.PublisherThread);
@@ -34,7 +38,11 @@
 
             this.SaveCommand = new DelegateCommand(this.Save, this.CanSave);
             applicationCommands.SaveCommand.RegisterCommand(this.SaveCommand);
+
+            this.GenerateNumbersCommand = new DelegateCommand(this.GenerateNumbers);
         }
+
+        public DelegateCommand GenerateNumbersCommand { get; set; }
 
         public DelegateCommand CreateNewCommand { get; set; }
 
@@ -64,6 +72,18 @@
             }
         }
 
+        public InteractionRequest<IConfirmation> SaveConfirmation { get; private set; }
+
+        private void GenerateNumbers()
+        {
+            this.SelectedPerson.Numbers.Clear();
+            for (var i = 0; i < 20; i++)
+            {
+                this.SelectedPerson.Numbers.Add(
+                    new KeyValuePair<int, int>(i, Randomizer<int>.Create(new IntRange(1000, 5000))));
+            }
+        }
+
         private void ValidateCanSave(object sender, PropertyChangedEventArgs e)
         {
             this.SaveCommand.RaiseCanExecuteChanged();
@@ -79,11 +99,11 @@
             return false;
         }
 
-        public InteractionRequest<IConfirmation> SaveConfirmation { get; private set; }
-
         private void Save()
         {
-            this.SaveConfirmation.Raise(new Confirmation() {Content = "Wollen Sie wirklich speichen?", Title = "Speichern?"}, this.OnSaveConfirmed);
+            this.SaveConfirmation.Raise(
+                new Confirmation { Content = "Wollen Sie wirklich speichen?", Title = "Speichern?" },
+                this.OnSaveConfirmed);
         }
 
         public void OnSaveConfirmed(IConfirmation confirmation)

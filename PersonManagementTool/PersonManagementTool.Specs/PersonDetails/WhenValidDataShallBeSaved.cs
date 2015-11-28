@@ -1,7 +1,5 @@
 ﻿namespace PersonManagementTool.Specs.PersonDetails
 {
-    using System;
-
     using DynamicSpecs.MSTest;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +7,6 @@
     using PersonManagementTool.Contracts;
     using PersonManagementTool.ViewModels;
 
-    using Tynamix.ObjectFiller;
     using FakeItEasy;
 
     using Prism.Events;
@@ -22,16 +19,7 @@
 
         public override void Given()
         {
-            var filler = new Filler<Person>();
-            filler.Setup()
-                .OnProperty(x => x.Error)
-                .IgnoreIt()
-                .OnProperty(x => x.Id)
-                .IgnoreIt()
-                .OnProperty(x => x.BirthDate)
-                .Use(new DateTimeRange(new DateTime(1851,1,1), DateTime.Now));
-
-            this.personToSave = filler.Create();
+            this.personToSave = this.Given<ValidPersonData>().Person;
 
             this.SUT.SelectedPerson = this.personToSave;
         }

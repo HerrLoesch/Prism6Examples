@@ -96,6 +96,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Converter\NullToVisibilityConverterTests.cs" />
+    <Compile Include="PersonDetails\ValidPersonData.cs" />
+    <Compile Include="PersonDetails\WhenPersonCreatesNumbers.cs" />
     <Compile Include="PersonDetails\WhenPersonHasValidDataForEachProperty.cs" />
     <Compile Include="PersonDetails\WhenPersonWithoutAnyDataIsShown.cs" />
     <Compile Include="PersonDetails\WhenUserWantsToAddANewPerson.cs" />
