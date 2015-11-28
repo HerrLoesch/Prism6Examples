@@ -1,19 +1,16 @@
-﻿namespace PersonManagementTool.Specs
+﻿namespace PersonManagementTool.Specs.PersonDetails
 {
     using System.Collections.Generic;
     using System.Linq;
 
+    using DynamicSpecs.Core;
     using DynamicSpecs.MSTest;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Contracts;
-
-    using DynamicSpecs.Core;
-
-    using ViewModels;
-
-    using Preconditions;
+    using PersonManagementTool.Contracts;
+    using PersonManagementTool.Specs.Preconditions;
+    using PersonManagementTool.ViewModels;
 
     using Prism.Events;
 

@@ -11,6 +11,6 @@
         public DateTime BirthDate { get; set; }
 
         
-        public int ID { get; set; }
+        public int? ID { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PersonManagementTool.Specs
+﻿namespace PersonManagementTool.Specs.PersonSelection
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,12 +9,11 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Contracts;
-    using Preconditions;
+    using PersonManagementTool.Contracts;
+    using PersonManagementTool.Specs.Preconditions;
+    using PersonManagementTool.ViewModels;
 
     using Prism.Events;
-
-    using ViewModels;
 
     [TestClass]
     public class WhenPersonIsSelected : Specifies<PersonSelectionViewModel>

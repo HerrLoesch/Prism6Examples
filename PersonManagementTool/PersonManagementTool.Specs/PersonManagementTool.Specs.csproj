@@ -87,11 +87,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Converter\NullToVisibilityConverterTests.cs" />
+    <Compile Include="PersonDetails\WhenUserWantsToAddANewPerson.cs" />
     <Compile Include="Preconditions\PersonsAreAvailable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WhenApplicationIsInitialized.cs" />
-    <Compile Include="WhenPersonIsSelected.cs" />
-    <Compile Include="WhenSelectedPersonChanges.cs" />
+    <Compile Include="PersonSelection\WhenApplicationIsInitialized.cs" />
+    <Compile Include="PersonSelection\WhenPersonIsSelected.cs" />
+    <Compile Include="PersonDetails\WhenSelectedPersonChanges.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

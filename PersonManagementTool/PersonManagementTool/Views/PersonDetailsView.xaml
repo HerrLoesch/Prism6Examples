@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:PersonManagementTool.Views"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:PersonManagementTool.ViewModels"
-             xmlns:Converter="clr-namespace:PersonManagementTool.Converter" x:Class="PersonManagementTool.Views.PersonDetailsView"
+             xmlns:converter="clr-namespace:PersonManagementTool.Converter" x:Class="PersonManagementTool.Views.PersonDetailsView"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance {x:Type viewModels:PersonDetailsDesignViewModel}, IsDesignTimeCreatable=True}"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
-        <Converter:NullToVisibilityConverter x:Key="InvertedNullToVisibilityConverter" IsInverted="True"/>
+        <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <converter:NullToVisibilityConverter x:Key="InvertedNullToVisibilityConverter" IsInverted="True"/>
     </UserControl.Resources>
     <Grid>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding SelectedPerson, Converter={StaticResource InvertedNullToVisibilityConverter}}" ><Run Text="Bitte wählen Sie eine Person auf der linken Seite."/></TextBlock>

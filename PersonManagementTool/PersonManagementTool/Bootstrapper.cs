@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PersonManagementTool
+﻿namespace PersonManagementTool
 {
     using System.Windows;
 
@@ -12,10 +6,9 @@ namespace PersonManagementTool
 
     using Prism.Unity;
 
-    using Microsoft.Practices.Unity.Configuration;
-
     using PersonManagementTool.Contracts;
     using PersonManagementTool.Data;
+    using PersonManagementTool.Infrastructure;
     using PersonManagementTool.Views;
 
     using Prism.Regions;
@@ -37,7 +30,7 @@ namespace PersonManagementTool
         /// </remarks>
         protected override DependencyObject CreateShell()
         {
-            return this.Container.Resolve<MainWindow>();
+            return this.Container.Resolve<Views.MainView>();
         }
 
         /// <summary>
@@ -49,6 +42,7 @@ namespace PersonManagementTool
             base.ConfigureContainer();
 
             this.Container.RegisterType<IPersonRepository, Repository>();
+            this.Container.RegisterType<IApplicationCommands, ApplicationCommands>(new ContainerControlledLifetimeManager());
         }
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace PersonManagementTool
         {
             base.InitializeShell();
 
-            var window = (MainWindow)this.Shell;
+            var window = (MainView)this.Shell;
             Application.Current.MainWindow = window;
 
             var regionManager = this.Container.Resolve<IRegionManager>();

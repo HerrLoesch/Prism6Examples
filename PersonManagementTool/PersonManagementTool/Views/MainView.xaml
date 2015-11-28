@@ -1,0 +1,32 @@
+﻿<Window x:Class="PersonManagementTool.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonManagementTool"
+        regions:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:regions="http://prismlibrary.com/"
+        mc:Ignorable="d"
+        Title="Person Management" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Datei">
+                <MenuItem Header="Neu" Command="{Binding ApplicationCommands.NewCommand}"></MenuItem>
+                <MenuItem Header="Speichern" Command="{Binding ApplicationCommands.SaveCommand}"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl Grid.Row="1" Grid.Column="0" regions:RegionManager.RegionName="{x:Static local:RegionNames.SelectionRegionName}" />
+        <ContentControl Grid.Row="1" Grid.Column="1" regions:RegionManager.RegionName="{x:Static local:RegionNames.ContentRegionName}" />
+    </Grid>
+</Window>
