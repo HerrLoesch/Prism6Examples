@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using PersonManagementTool.Annotations;
+    using PersonManagementTool.Properties;
 
     public class Person : INotifyPropertyChanged, IDataErrorInfo
     {

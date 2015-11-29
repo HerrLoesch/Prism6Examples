@@ -1,5 +1,7 @@
 ﻿namespace PersonManagementTool
 {
+    using System.IO;
+    using System.Reflection;
     using System.Windows;
 
     using Microsoft.Practices.Unity;
@@ -11,6 +13,7 @@
     using PersonManagementTool.Infrastructure;
     using PersonManagementTool.Views;
 
+    using Prism.Modularity;
     using Prism.Regions;
 
     public class Bootstrapper : UnityBootstrapper
@@ -60,6 +63,20 @@
             regionManager.RegisterViewWithRegion(RegionNames.ContentRegionName, typeof(PersonDetailsView));
 
             window.Show();
+        }
+
+        /// <summary>
+        /// Creates the <see cref="T:Prism.Modularity.IModuleCatalog"/> used by Prism.
+        /// </summary>
+        /// <remarks>
+        /// The base implementation returns a new ModuleCatalog.
+        /// </remarks>
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            var directoryModuleCatalog = new DirectoryModuleCatalog();
+            directoryModuleCatalog.ModulePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\modules\";
+
+            return directoryModuleCatalog;
         }
     }
 }
