@@ -1,5 +1,6 @@
 ﻿namespace PersonManagementTool.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
@@ -9,6 +10,7 @@
     using Prism.Events;
     using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
+    using Prism.Regions;
 
     using Tynamix.ObjectFiller;
 
@@ -20,11 +22,15 @@
 
         private Person selectedPerson;
 
+        private IRegionManager regionManager;
+
         public PersonDetailsViewModel(
             IEventAggregator eventAggregator,
             IPersonRepository repository,
-            IApplicationCommands applicationCommands)
+            IApplicationCommands applicationCommands,
+            IRegionManager regionManager)
         {
+            this.regionManager = regionManager;
             this.eventAggregator = eventAggregator;
             this.repository = repository;
             this.SaveConfirmation = new InteractionRequest<IConfirmation>();
@@ -40,9 +46,18 @@
             applicationCommands.SaveCommand.RegisterCommand(this.SaveCommand);
 
             this.GenerateNumbersCommand = new DelegateCommand(this.GenerateNumbers);
+
+            this.ShowAnalyzationCommand = new DelegateCommand(this.ShowAnalyzation);
+        }
+
+        private void ShowAnalyzation()
+        {
+           this.regionManager.RequestNavigate(RegionNames.ContentRegionName, "BarChartView");
         }
 
         public DelegateCommand GenerateNumbersCommand { get; set; }
+
+        public DelegateCommand ShowAnalyzationCommand { get; }
 
         public DelegateCommand CreateNewCommand { get; set; }
 

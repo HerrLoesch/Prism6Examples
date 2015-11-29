@@ -19,6 +19,8 @@
         InteractionRequest<IConfirmation> SaveConfirmation { get; }
 
         DelegateCommand GenerateNumbersCommand { get; set; }
+
+        DelegateCommand ShowAnalyzationCommand { get; }
     }
 
     public class PersonDetailsDesignViewModel : IPersonDetailsViewModel
@@ -32,6 +34,8 @@
         public DelegateCommand GenerateNumbersCommand { get; set; }
 
         public Person SelectedPerson { get; set; }
+
+        public DelegateCommand ShowAnalyzationCommand { get; private set; }
 
         public PersonDetailsDesignViewModel()
         {
